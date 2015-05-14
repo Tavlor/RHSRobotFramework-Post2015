@@ -1,0 +1,88 @@
+# sample commands
+#MODE <block number>
+#BEGIN
+#END
+#DELAY <seconds>
+#MOVE <left speed> <right speed>
+#MMOVE <speed> <distance:inches> <timeout>
+#SEEKTOTE <time:delay before looking for tote> <timeout:seconds>
+#TURN <degrees> <timeout>
+#STRAIGHT <speed> <timeout:seconds>
+#TOTEEXTEND
+#TOTERETRACT
+#STARTTOTEUP
+#TOTEUP <number of totes>
+#TOTEDOWN <number of totes>
+#CLAWOPEN
+#CLAWCLOSE
+#CLICKERUP
+#CLICKERDOWN
+#
+BEGIN
+# pick up first tote, we should already be attached
+STARTTOTEUP
+DELAY 0.25
+TOTERETRACT
+TOTEUP 1
+#search for the second tote
+SEEKTOTE 2.0 7.0
+TOTEDOWN 1
+DELAY 1.50
+TOTEEXTEND
+DELAY 1.00
+STARTTOTEUP
+DELAY 0.25 
+TOTERETRACT
+TOTEUP 2
+##search for the third tote
+SEEKTOTE 2.0 7.0
+TOTEDOWN 2
+DELAY 1.50
+TOTEEXTEND
+DELAY 1.0
+STARTTOTEUP
+DELAY 0.25
+TOTEUP 3
+DELAY 0.75
+TOTERETRACT
+TURN 90.0 5.0
+STRAIGHT -0.75 3.0
+#TOTEDOWN 2
+# pick up first and second tote
+# from here down is "real" script
+## lift the first tote up, we should already be attached
+#TOTEUP 1
+#TOTERETRACT
+#DELAY 1.0
+##search for the second tote
+#SEEKTOTE 2.0 7.0
+##stack two totes
+#TOTEEXTEND
+#DELAY 1.0
+#TOTEDOWN 1
+#DELAY 2.0
+#TOTEUP 2
+#TOTERETRACT
+#DELAY 2.0
+##search for the third tote
+#SEEKTOTE 2.0 7.0
+##stack three totes
+#TOTEEXTEND
+#DELAY 1.0
+#TOTEDOWN 2
+#DELAY 2.0
+#TOTEUP 3
+#TOTERETRACT
+#DELAY 2.0
+##drive to middle zone
+#TURN 80.0 5.0
+#STRAIGHT -0.5 3.0
+## set totes down
+#TOTEEXTEND
+#TOTEDOWN 3
+#DELAY 2.0
+#TOTERETRACT
+## move back to starting zone
+#TURN -80.0 5.0
+#STRAIGHT 0.5 3.0
+END
