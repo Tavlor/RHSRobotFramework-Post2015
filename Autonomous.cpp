@@ -145,6 +145,17 @@ void Autonomous::Delay(float delayTime)
 		Wait(0.01);
 	}
 }
+
+bool Autonomous::Start()
+{
+	//TODO write Autonomous::Start()
+}
+
+bool Autonomous::Finish()
+{
+	//TODO write Autonomous::Finish()
+}
+
 bool Autonomous::Begin(char *pCurrLinePos)
 {
 	//tell all the components who may need to know that auto is beginning

@@ -37,9 +37,11 @@ ComponentBase::ComponentBase(const char* componentName, const char *queueName, i
 	pDebugTimer = new Timer();
 	pDebugTimer->Start();
 
+	pSafetyTimer = new Timer();
+	pSafetyTimer->Start();
+
 	mkfifo(queueName, 0666);
 	queueLocal = queueName;
-	//printf("COMPONENT: %s\n",componentName); //Added by Talyor for debugging
 }
 
 void ComponentBase::SendMessage(RobotMessage* robotMessage)
@@ -63,7 +65,6 @@ void ComponentBase::ReceiveMessage()			//Receives a message and copies it into l
 
 	if(iPipeRcv < 0)
 	{
-		//printf("ComponentBase opening pipe\n");
 		iPipeRcv = open(queueLocal.c_str(), O_RDONLY);
 		assert(iPipeRcv > 0);
 	}
@@ -120,10 +121,15 @@ void ComponentBase::DoWork()
 		}
 
 		Run();			//Component logic
-		//if(ISAUTO) { AutoBehavior(); } //TODO: add this after world's for easier auto coding
+		//
+		//if(ISAUTO) { AutoBehavior(); } //TODO should we add AutoBehavior?
 		//AutoBehavior is where the actual auto stuff is called - it should be periodic rather than stop up the thread
 		//It should be structured as a state machine; Run will change the state.
-		//if(pRemoteUpdateTimer->Get() > fUpdateDelay) { pRemoteUpdateTimer->Reset(); SmartDashboardUpdate(); } //TODO: add this after world's
+		if (pRemoteUpdateTimer->Get() > fUpdateDelay)
+		{
+			pRemoteUpdateTimer->Reset();
+			SmartDashboardUpdate();
+		}
 		lastCommand = localMessage.command;
 		iLoop++;
 	}

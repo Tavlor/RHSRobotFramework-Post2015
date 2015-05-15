@@ -57,6 +57,8 @@ private:
 	MessageCommand ReceivedCommand;
 
 	void Delay(float);
+	bool Start();
+	bool Finish();
 	bool Begin(char *);
 	bool End(char *);
 	bool Move(char *);

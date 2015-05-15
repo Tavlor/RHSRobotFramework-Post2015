@@ -20,6 +20,8 @@
 using namespace std;
 
 const char *szTokens[] = {
+		"START"
+		"FINISH"
 		"MODE",
 		"DEBUG",
 		"MESSAGE",
@@ -140,9 +142,20 @@ bool Autonomous::Evaluate(std::string rStatement) {
 
 	switch (iCommand)
 	{
+
+	case AUTO_TOKEN_START_AUTO:
+		Start();
+		rStatus.append("starting auto");
+		break;
+
+	case AUTO_TOKEN_FINISH_AUTO:
+		Finish();
+		rStatus.append("finishing auto");
+		break;
+
 	case AUTO_TOKEN_BEGIN:
 		Begin(pCurrLinePos);
-		rStatus.append("start");
+		rStatus.append("begin");
 		break;
 
 	case AUTO_TOKEN_END:

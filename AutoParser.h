@@ -13,6 +13,8 @@ const char szDelimiters[] = " ,[]()";
 ///N - doesn't need a response; R - needs a response; _ - contained within auto thread
 typedef enum AUTO_COMMAND_TOKENS
 {
+	AUTO_TOKEN_START_AUTO,			//!<R	send message to all components to set up for Autonomous
+	AUTO_TOKEN_FINISH_AUTO,			//!<R	send message to all components that Autonomous is done
 	AUTO_TOKEN_MODE,				//!<	mode block number, number(integer)
 	AUTO_TOKEN_DEBUG,				//!<	debug mode, 0 = off, 1 = on
 	AUTO_TOKEN_MESSAGE,				//!<	print debug message

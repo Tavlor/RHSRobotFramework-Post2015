@@ -40,32 +40,30 @@ public:
 	int GetLoop() { return(iLoop); };
 
 protected:
-	//Timer *pSafetyTimer; //TODO: add after world's
+	Timer *pSafetyTimer;
 	Timer *pAutoTimer;
-	//TODO: move to private after worlds? subclasses shouldn't need access thanks to SmartDashboardUpdate()
-	Timer *pRemoteUpdateTimer;
 	Timer *pDebugTimer;
 	Task *pTask;
 	RobotMessage localMessage;
 	MessageCommand lastCommand;//used to detect changes in commands sent
 	int iLoop;
-	
+
 	virtual void OnStateChange() = 0;
 	virtual void Run() = 0;
-
-	// virtual void AutoBehavior() = 0; //TODO: add after world's
-	//virtual void SmartDashboardUpdate() = 0; //TODO: add after world's
+	//virtual void AutoBehavior() = 0;
+	virtual void SmartDashboardUpdate() = 0;
 
 	///used to send a message back to autonomous or whatever to notify completion of a function
 	void SendCommandResponse(MessageCommand);
 
 private:
+	const float fUpdateDelay = .15;
 	char* componentName;
 	string queueLocal;
 	int iPipeRcv;
 	int iPipeXmt;
 	int iPipeRpt;
-	//const float fUpdateDelay = .1; //TODO: add after world's
+	Timer *pRemoteUpdateTimer;
 
 	void ReceiveMessage();
 	void ReportMessage();
