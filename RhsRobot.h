@@ -7,18 +7,12 @@
 #ifndef RHS_ROBOT_H
 #define RHS_ROBOT_H
 
-#include <Cube.h>
 #include "WPILib.h"
 
 #include "Autonomous.h"
-#include "Conveyor.h"
 #include "Drivetrain.h"
-#include "CanLifter.h"
-#include "Claw.h"
-//#include "CanArm.h"
-#include "NoodleFan.h"
 #include "RhsRobotBase.h"
-#include "JoystickListener.h"
+#include "JoystickMonitor.h"
 
 class RhsRobot : public RhsRobotBase
 {
@@ -27,18 +21,12 @@ public:
 	virtual ~RhsRobot();
 
 private:
+	const float fDriveMax = 1;
+
 	Joystick* Controller_1;
-	Joystick* Controller_2;
-	JoystickListener* ControllerListen_1;
-	JoystickListener* ControllerListen_2;
+	JoystickMonitor* Monitor_1;
 	Drivetrain* drivetrain;
 	Autonomous* autonomous;
-	Conveyor* conveyor;
-	Cube* cube;
-	CanLifter* canlifter;
-	Claw* claw;
-	//CanArm* canarm;
-	NoodleFan *noodlefan;
 
 	std::vector <ComponentBase *> ComponentSet;
 	
@@ -48,10 +36,7 @@ private:
 	bool CheckButtonPressed(bool, bool);
 	bool CheckButtonReleased(bool, bool);
 
-	bool bLastConveyorButtonDown;
-	bool bCanlifterNearBottom; //used for speed changes in driving
-	const float fDriveReduction = .5;
-	const float fDriveMax = 0.75;
+
 	int iLoop;
 };
 

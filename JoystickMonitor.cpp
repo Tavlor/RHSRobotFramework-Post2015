@@ -1,10 +1,10 @@
-#include "JoystickListener.h"
+#include "JoystickMonitor.h"
 #include "RobotParams.h"
 #include "WPILib.h"
 
 #include <cmath>
 
-JoystickListener::JoystickListener(Joystick *j) {
+JoystickMonitor::JoystickMonitor(Joystick *j) {
 	stick = j;
 	axisTolerance = .0001;
 
@@ -18,7 +18,7 @@ JoystickListener::JoystickListener(Joystick *j) {
 		axisValues.push_back(stick->GetRawAxis(i + 1));
 	}
 }
-JoystickListener::~JoystickListener() {
+JoystickMonitor::~JoystickMonitor() {
 
 }
 
@@ -26,7 +26,7 @@ JoystickListener::~JoystickListener() {
  * Updates the stored "previous" values of each button and axis.
  * Be sure to call this at the END of the run function so that you have these values during the next cycle.
  */
-void JoystickListener::FinalUpdate() {
+void JoystickMonitor::FinalUpdate() {
 	for (unsigned int i = 0; i < buttonsDown.size(); i++)
 	{
 		buttonsDown[i] = stick->GetRawButton(i + 1);
@@ -38,7 +38,7 @@ void JoystickListener::FinalUpdate() {
 }
 
 ///Returns true if the target button was up in the previous cycle but is down in the current cycle.
-bool JoystickListener::ButtonPressed(unsigned int button) {
+bool JoystickMonitor::ButtonPressed(unsigned int button) {
 	if (button > 0 && button <= buttonsDown.size()
 			&& stick->GetRawButton(button) && !buttonsDown[button - 1])
 	{
@@ -48,7 +48,7 @@ bool JoystickListener::ButtonPressed(unsigned int button) {
 }
 
 ///Returns true if the target button was down in the previous cycle but is up in the current cycle.
-bool JoystickListener::ButtonReleased(unsigned int button) {
+bool JoystickMonitor::ButtonReleased(unsigned int button) {
 	if (button > 0 && button <= buttonsDown.size()
 			&& !stick->GetRawButton(button) && buttonsDown[button - 1])
 	{
@@ -58,7 +58,7 @@ bool JoystickListener::ButtonReleased(unsigned int button) {
 }
 
 ///Returns true if given axis moved at least the tolerated distance between the cycles.
-bool JoystickListener::AxisMoved(unsigned int axis) {
+bool JoystickMonitor::AxisMoved(unsigned int axis) {
 	if (axis > 0 && axis <= axisValues.size()
 			&& std::abs(stick->GetRawAxis(axis) - axisValues[axis - 1])
 					> axisTolerance)
@@ -68,10 +68,10 @@ bool JoystickListener::AxisMoved(unsigned int axis) {
 	return false;
 }
 
-void JoystickListener::SetAxisTolerance(float tolerance) {
+void JoystickMonitor::SetAxisTolerance(float tolerance) {
 	axisTolerance = tolerance;
 }
 
-float JoystickListener::GetAxisTolerance() {
+float JoystickMonitor::GetAxisTolerance() {
 	return axisTolerance;
 }
