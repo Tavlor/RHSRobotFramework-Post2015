@@ -131,6 +131,17 @@
  		\endverbatim
  *
  *
+ *	-- ALWAYS keep track of motor type & directions. Remember that CIMs turn in the direction opposite of BAGs.
+ *
+ *	\verbatim
+ *	//
+	MOTOR VALUES with CAN
+	 + backwards (towards back)
+	 - forwards (towards front)
+	 //
+ 		\endverbatim
+
+
  *		<b> AUTONOMOUS </b> \n
  *
  *	-- Under no circumstances are you to allow the robot to become self-aware.

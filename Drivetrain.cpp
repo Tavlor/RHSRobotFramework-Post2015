@@ -240,6 +240,7 @@ void Drivetrain::Run() {
 }
 
 void Drivetrain::ArcadeDrive(float x, float y) {
+	//TODO: add speed reduction
 	leftMotor->Set(y + x / 2);
 	rightMotor->Set(-(y - x / 2));
 }
