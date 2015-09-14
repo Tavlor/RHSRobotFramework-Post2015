@@ -43,11 +43,6 @@ Drivetrain::Drivetrain() :
 	wpi_assert(leftMotor->IsAlive());
 	wpi_assert(rightMotor->IsAlive());
 
-	//toteSensor = new DigitalInput(DIO_DRIVETRAIN_BEAM_BREAK);
-
-	//pAutoTimer = new Timer();IN COMPONENT BASE
-	//pAutoTimer->Start();
-
 	gyro = new ADXRS453Z;
 	wpi_assert(gyro);
 	gyro->Start();
@@ -81,6 +76,7 @@ void Drivetrain::OnStateChange()			//Handles state changes
 		//gyro->Zero();
 		//encoder->Reset();
 		//gyro should be reset by a message from autonomous
+		//DO NOT RESET GYRO HERE! If state changes during auto, we will be lost!
 		break;
 
 	case COMMAND_ROBOT_STATE_TEST:
@@ -173,17 +169,11 @@ void Drivetrain::Run() {
 		StartTurn(localMessage.params.autonomous.turnAngle,localMessage.params.autonomous.timeout);
 		break;
 
-	/*case COMMAND_DRIVETRAIN_SEEK_TOTE:
-		SeekTote(localMessage.params.autonomous.timein,localMessage.params.autonomous.timeout);
-		break;*/
-
 	case COMMAND_DRIVETRAIN_STOP:
 		//SmartDashboard::PutString("Drivetrain CMD", "DRIVETRAIN_STOP");
 		//reset all auto variables
 		bDrivingStraight = false;
 		bTurning = false;
-		bFrontLoadTote = false;
-		bBackLoadTote = false;
 		left = 0.0;
 		right = 0.0;
 		leftMotor->Set(left);
@@ -193,12 +183,12 @@ void Drivetrain::Run() {
 
 	case COMMAND_DRIVETRAIN_START_DRIVE_FWD:
 		gyro->Zero();
-		bFrontLoadTote = true;
+		#Needs more code
 		break;
 
 	case COMMAND_DRIVETRAIN_START_DRIVE_BCK:
 		gyro->Zero();
-		bBackLoadTote = true;
+		#Needs more code
 		break;
 
 	case COMMAND_DRIVETRAIN_START_KEEPALIGN:
@@ -336,30 +326,6 @@ void Drivetrain::Turn(float targetAngle, float timeout) {
 	SmartDashboard::PutNumber("Turn Speed", 0.0);
 }
 
-void Drivetrain::SeekTote(float timein, float timeout) {
-	MessageCommand command = COMMAND_AUTONOMOUS_RESPONSE_ERROR;
-	pAutoTimer->Reset();
-
-	while ((pAutoTimer->Get() < timeout)
-			&& ISAUTO)
-	{
-		if (toteSensor->Get() && pAutoTimer->Get() > timein)
-		{
-			command = COMMAND_AUTONOMOUS_RESPONSE_OK;
-			break;
-		}
-		StraightDriveLoop(fToteSeekSpeed);
-		Wait(0.01);
-	}
-
-	left = 0;
-	right = 0;
-	leftMotor->Set(0.0);
-	rightMotor->Set(0.0);
-
-	SendCommandResponse(command);
-}
-
 void Drivetrain::StartStraightDrive(float speed, float time)
 {
 	pAutoTimer->Reset();
@@ -495,11 +461,6 @@ void Drivetrain::StraightDriveLoop(float speed) {
 		SmartDashboard::PutNumber("Angle Adjustment", adjustment);
 		SmartDashboard::PutNumber("Gyro Angle", gyro->GetAngle());
 	}
-}
-
-bool Drivetrain::GetToteSensor()
-{
-	return toteSensor->Get();
 }
 
 bool Drivetrain::GetGyroAngle()
