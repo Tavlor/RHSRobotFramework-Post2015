@@ -9,35 +9,7 @@
 #MMOVE <speed> <distance:inches> <timeout>
 #TURN <degrees> <timeout>
 #STRAIGHT <speed> <duration>
-#CLAWOPEN
-#CLAWCLOSE
-#CLAWTOTOP
-#CLAWTOBOTTOM
-#CANUP
-#RAISECANTOLOMID
-#LOWERCANTOHIMID
-#STACKUP <number of totes>
-#STACKDOWN <number of totes>
-#FRONTLOADTOTE <timeout>
-#BACKLOADTOTE <timeout>
-#FRONTSEEKTOTE <drive speed> <timeout>
-#BACKSEEKTOTE <drive speed> <timeout>
-#DEPOSITTOTESBACK
-#TOTESHIFTFWD
-#TOTESHIFTBCK
-#TOTEPUSHBCK
-#CANARMOPEN <delay>
-#CANARMCLOSE <delay>
-# unneeded - do not use, not fully tested
-#SEEKTOTE <time:delay before looking for tote> <timeout>
-#STARTTOTEUP
-#TOTEEXTEND
-#TOTERETRACT
-#CUBEAUTO
-#CLICKERUP
-#CLICKERDOWN
 #----------------------------------------------------------------
 BEGIN
-# drag the can to the autozone - if other teams get more cans from the step, we get points
 #STRAIGHT 0.5 3.0
 END

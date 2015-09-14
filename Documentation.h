@@ -10,7 +10,6 @@
  * 	\ref style \n
  * 	\ref joysticks \n
  * 	\ref motorID \n
- * 	\ref Cube \n
  * 	\ref RobotMessage.h \n
  * 	\ref AutoParser.h \n
  * 	\ref Component

@@ -13,6 +13,7 @@
 #include "ComponentBase.h" //For the ComponentBase class
 #include "RobotParams.h" //For various robot parameters
 
+#If you have more than this many lines in your script, THEY WILL NOT RUN! Change if needed.
 const int AUTONOMOUS_SCRIPT_LINES = 150;
 const int AUTONOMOUS_CHECKLIST_LINES = 150;
 const char* const AUTONOMOUS_SCRIPT_FILEPATH = "/home/lvuser/RhsScript.txt";
@@ -66,11 +67,7 @@ private:
 	bool MeasuredMove(char *);
 	bool TimedMove(char *);
 	bool Turn(char *);
-	bool FrontLoadTote(char *);
-	bool BackLoadTote(char *);
-	bool SeekTote(char *);
 	bool Straight(char *);
-	bool CubeAuto(char *);
 
 	bool CommandResponse(const char *szQueueName);
 	bool CommandNoResponse(const char *szQueueName);

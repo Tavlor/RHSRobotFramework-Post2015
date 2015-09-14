@@ -4,7 +4,7 @@
  * This header contains basic parameters for the robot. All parameters must be constants with internal
  * linkage, otherwise the One Definition Rule will be violated.
  */
-
+#TODO: please go over these items with a knowledgeable mentor and check to see what we need/don't need
 #ifndef ROBOT_PARAMS_H
 #define ROBOT_PARAMS_H
 
@@ -37,12 +37,6 @@ const int DRIVETRAIN_PRIORITY 	= DEFAULT_PRIORITY;
 const int AUTONOMOUS_PRIORITY 	= DEFAULT_PRIORITY;
 const int AUTOEXEC_PRIORITY 	= DEFAULT_PRIORITY;
 const int AUTOPARSER_PRIORITY 	= DEFAULT_PRIORITY;
-const int CONVEYOR_PRIORITY 	= DEFAULT_PRIORITY;
-const int CUBE_PRIORITY 		= DEFAULT_PRIORITY;
-const int CANLIFTER_PRIORITY 	= DEFAULT_PRIORITY;
-const int CLAW_PRIORITY 		= DEFAULT_PRIORITY;
-const int CANARM_PRIORITY		= DEFAULT_PRIORITY;
-const int NOODLEFAN_PRIORITY	= DEFAULT_PRIORITY;
 
 //Task Names - Used when you view the task list but used by the operating system
 //EXAMPLE: const char* DRIVETRAIN_TASKNAME = "tDrive";
@@ -51,24 +45,12 @@ const char* const DRIVETRAIN_TASKNAME	= "tDrive";
 const char* const AUTONOMOUS_TASKNAME	= "tAuto";
 const char* const AUTOEXEC_TASKNAME		= "tAutoEx";
 const char* const AUTOPARSER_TASKNAME	= "tParse";
-const char* const CONVEYOR_TASKNAME		= "tConveyor";
-const char* const CUBE_TASKNAME			= "tCube";
-const char* const CANLIFTER_TASKNAME	= "tCanLift";
-const char* const CLAW_TASKNAME			= "tClaw";
-const char* const CANARM_TASKNAME		= "tCanArm";
-const char* const NOODLEFAN_TASKNAME	= "tNoodleFan";
 
 const int COMPONENT_STACKSIZE	= 0x10000;
 const int DRIVETRAIN_STACKSIZE	= 0x10000;
 const int AUTONOMOUS_STACKSIZE	= 0x10000;
 const int AUTOEXEC_STACKSIZE	= 0x10000;
 const int AUTOPARSER_STACKSIZE	= 0x10000;
-const int CONVEYOR_STACKSIZE	= 0x10000;
-const int CUBE_STACKSIZE		= 0x10000;
-const int CANLIFTER_STACKSIZE	= 0x10000;
-const int CLAW_STACKSIZE		= 0x10000;
-const int CANARM_STACKSIZE		= 0x10000;
-const int NOODLEFAN_STACKSIZE	= 0x10000;
 
 //TODO change these variables throughout the code to PIPE or whatever instead  of QUEUE
 //Queue Names - Used when you want to open the message queue for any task
@@ -78,12 +60,6 @@ const char* const COMPONENT_QUEUE 	= "/tmp/qComp";
 const char* const DRIVETRAIN_QUEUE 	= "/tmp/qDrive";
 const char* const AUTONOMOUS_QUEUE 	= "/tmp/qAuto";
 const char* const AUTOPARSER_QUEUE 	= "/tmp/qParse";
-const char* const CONVEYOR_QUEUE	= "/tmp/qConvey";
-const char* const CUBE_QUEUE		= "/tmp/qCube";
-const char* const CANLIFTER_QUEUE	= "/tmp/qCanLift";
-const char* const CLAW_QUEUE		= "/tmp/qClaw";
-const char* const CANARM_QUEUE		= "/tmp/qCanArm";
-const char* const NOODLEFAN_QUEUE	= "/tmp/qNoodleFan";
 
 //PWM Channels - Assigns names to PWM ports 1-10 on the Roborio
 //EXAMPLE: const int PWM_DRIVETRAIN_FRONT_LEFT_MOTOR = 1;
@@ -97,36 +73,19 @@ const int PWM_DRIVETRAIN_RIGHT_MOTOR = 0;
 0 - PDB
 1 - left drive motor
 2 - right drive motor
-3 - conveyor
-4 - claw
-5 - can lift
-6 - noodle fan
-7 - ~~
-8 - cube intake roller
-9 - cube clicker
+Add more as needed.
  \endverbatim
  */
 const int CAN_PDB = 0;
 const int CAN_DRIVETRAIN_LEFT_MOTOR = 1;
 const int CAN_DRIVETRAIN_RIGHT_MOTOR = 2;
-const int CAN_PALLET_JACK_CONVEYOR = 3;
-const int CAN_PALLET_JACK_CLAW = 4;
-const int CAN_PALLET_JACK_BIN_LIFT = 5;
-const int CAN_PALLET_JACK_CAN_ARM = 6;
-const int CAN_PALLET_JACK_NOODLE_FAN = 6;
-const int CAN_CUBE_INTAKE = 8;
-const int CAN_CUBE_CLICKER = 9;
 
 //Relay Channels - Assigns names to Relay ports 1-8 on the Roborio
 //EXAMPLE: const int RLY_COMPRESSOR = 1;
 
-const int CUBECLICKER_MAX_TOTES = 6;
-
 //Digital I/O - Assigns names to Digital I/O ports 1-14 on the Roborio
 //EXAMPLE: const int DIO_DRIVETRAIN_BEAM_BREAK = 0;
-//const int DIO_CANLIFTER_LOWER_HALL_EFFECT = 0;
-//const int DIO_CANLIFTER_UPPER_HALL_EFFECT = 1;
-const int DIO_CANLIFTER_HOVER_HALL_EFFECT = 9; //due to cable length
+
 
 //Solenoid - Assigns names to Solenoid ports 1-8 on the 9403
 //EXAMPLE: const int SOL_DRIVETRAIN_SOLENOID_SHIFT_IN = 1;
@@ -201,18 +160,6 @@ const int POV_STILL = -1;
 #define TANK_DRIVE_RIGHT_ID			L310_THUMBSTICK_RIGHT_Y
 #define ARCADE_DRIVE_X_ID			L310_THUMBSTICK_LEFT_X
 #define ARCADE_DRIVE_Y_ID			L310_THUMBSTICK_LEFT_Y
-#define CONVEYOR_FWD_ID				L310_BUTTON_BUMPER_LEFT
-#define CONVEYOR_BCK_ID				L310_BUTTON_BUMPER_RIGHT
-#define CANLIFTER_RAISE_ID			L310_TRIGGER_LEFT
-#define CANLIFTER_LOWER_ID			L310_TRIGGER_RIGHT
-//#define CANLIFTER_HOVER_ID		L310_BUTTON_A
-#define NOODLEFAN_TOGGLE_ID			L310_BUTTON_A
-#define CLAW_CLOSE_ID				L310_BUTTON_THUMB_RIGHT
-#define CLAW_OPEN_ID				L310_BUTTON_THUMB_LEFT
-#define CUBEAUTO_START_ID			L310_BUTTON_START	//Used on both controllers
-#define CUBEAUTO_STOP_ID			L310_BUTTON_STOP	//Used on both controllers
-#define CUBEAUTO_HOLD_ID			L310_BUTTON_X		//Used on both controllers
-#define CUBEAUTO_RELEASE_ID			L310_BUTTON_Y		//Used on both controllers
 
 //#define TANK_DRIVE_LEFT			pow(-Controller_1->GetRawAxis(L310_THUMBSTICK_LEFT_Y),3)
 //#define TANK_DRIVE_RIGHT			pow(-Controller_1->GetRawAxis(L310_THUMBSTICK_RIGHT_Y),3)
@@ -220,12 +167,6 @@ const int POV_STILL = -1;
 #define TANK_DRIVE_RIGHT			(-Controller_1->GetRawAxis(L310_THUMBSTICK_RIGHT_Y))
 #define ARCADE_DRIVE_X				Controller_1->GetRawAxis(L310_THUMBSTICK_LEFT_X)
 #define ARCADE_DRIVE_Y				-Controller_1->GetRawAxis(L310_THUMBSTICK_LEFT_Y)
-#define CONVEYOR_FWD				Controller_1->GetRawButton(L310_BUTTON_BUMPER_LEFT)
-#define CONVEYOR_BCK				Controller_1->GetRawButton(L310_BUTTON_BUMPER_RIGHT)
-#define CANLIFTER_RAISE				Controller_1->GetRawAxis(L310_TRIGGER_RIGHT)
-#define CANLIFTER_LOWER				Controller_1->GetRawAxis(L310_TRIGGER_LEFT)
-#define CLAW_CLOSE					Controller_1->GetRawButton(L310_BUTTON_THUMB_LEFT)
-#define CLAW_OPEN					Controller_1->GetRawButton(L310_BUTTON_THUMB_RIGHT)
 #endif // USE_L310_FOR_CONTROLLER_1
 
 #ifdef USE_X3D_FOR_CONTROLLER_2
@@ -235,16 +176,6 @@ const int POV_STILL = -1;
 #endif // USE_XBOX_FOR_CONTROLLER_2
 
 #ifdef USE_L310_FOR_CONTROLLER_2
-//ID numbers for various buttons and axis
-#define CUBEINTAKE_RUN_ID			L310_BUTTON_BUMPER_LEFT
-#define CUBECLICKER_RAISE_ID		L310_THUMBSTICK_RIGHT_Y
-#define CUBECLICKER_LOWER_ID		L310_THUMBSTICK_RIGHT_Y
-
-#define CUBEINTAKE_RUN				Controller_2->GetRawButton(L310_BUTTON_BUMPER_LEFT)
-#define CUBEAUTO_START				Controller_2->GetRawButton(L310_BUTTON_X)
-#define CUBEAUTO_STOP				Controller_2->GetRawButton(L310_BUTTON_Y)
-#define CUBECLICKER_RAISE			(-Controller_2->GetRawAxis(L310_THUMBSTICK_RIGHT_Y) > 0.65)
-#define CUBECLICKER_LOWER			(-Controller_2->GetRawAxis(L310_THUMBSTICK_RIGHT_Y) < -0.65)
 #endif // USE_L310_FOR_CONTROLLER_2
 
 #endif //ROBOT_PARAMS_H
